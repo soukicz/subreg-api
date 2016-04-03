@@ -16,7 +16,7 @@ class Client {
     }
 
     protected function getClient() {
-        if(!$this->key) {
+        if(!$this->client) {
             $this->client = new \SoapClient(null, [
                 'location' => 'https://soap.subreg.cz/cmd.php',
                 'uri' => 'https://soap.subreg.cz/soap'
@@ -39,10 +39,10 @@ class Client {
     }
 
     protected function send($command, array $data) {
+        $this->getClient();
         $data['ssid'] = $this->key;
 
-        $params = ['data' => $data];
-        $res = $this->getClient()->__call($command, $params);
+        $res = $this->getClient()->__call($command, ['data' => $data]);
 
         if($res['status'] != 'ok') {
             throw new IOException('Subreg: ' . $res['error']['errormsg']);
@@ -85,7 +85,7 @@ class Client {
         foreach ($this->send('Domains_List', [])['domains'] as $response) {
             $list[] = (new DomainInfo())
                 ->setName($response['name'])
-                ->setExpiration(new \DateTime($response['expiration']));
+                ->setExpiration(new \DateTime($response['expire']));
         }
 
         return $list;
