@@ -1,5 +1,5 @@
 <?php
-namespace Simplia\SubregApi;
+namespace Soukicz\SubregApi;
 
 class Client {
     protected $login;
@@ -15,7 +15,7 @@ class Client {
         $this->password = $password;
     }
 
-    public function connect() {
+    protected function getClient() {
         if(!$this->key) {
             $this->client = new \SoapClient(null, [
                 'location' => 'https://soap.subreg.cz/cmd.php',
@@ -34,6 +34,8 @@ class Client {
             }
             $this->key = $res['ssid'];
         }
+
+        return $this->client;
     }
 
     protected function send($command, array $data) {
@@ -73,5 +75,19 @@ class Client {
                 'params' => $params,
             ]
         ]);
+    }
+
+    /**
+     * @return DomainInfo[];
+     */
+    public function getDomains() {
+        $list = [];
+        foreach ($this->send('Domains_List', [])['domains'] as $response) {
+            $list[] = (new DomainInfo())
+                ->setName($response['name'])
+                ->setExpiration(new \DateTime($response['expiration']));
+        }
+
+        return $list;
     }
 }

@@ -1,9 +1,8 @@
 {
-  "name": "simplia/subreg-api",
+  "name": "soukicz/subreg-api",
   "description": "Subreg.cz",
   "minimum-stability": "stable",
-  "license": "proprietary",
-  "version": "0.0.1",
+  "license": "MIT",
   "authors": [
     {
       "name": "Petr Soukup",
@@ -15,19 +14,16 @@
     "ext-soap": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "~4.0"
+    "phpunit/phpunit": "~5.0"
   },
   "autoload": {
     "psr-4": {
-      "Simplia\\SubregApi\\": "src/"
-    },
-    "classmap": [
-      "src/exceptions.php"
-    ]
+      "Soukicz\\SubregApi\\": "src/"
+    }
   },
   "autoload-dev": {
     "classmap": [
-      "tests/SimpliaTests"
+      "tests/SoukiczTests"
     ]
   }
 }
