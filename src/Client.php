@@ -42,7 +42,7 @@ class Client {
         $data['ssid'] = $this->key;
 
         $params = ['data' => $data];
-        $res = $this->client->__call($command, $params);
+        $res = $this->getClient()->__call($command, $params);
 
         if($res['status'] != 'ok') {
             throw new IOException('Subreg: ' . $res['error']['errormsg']);
