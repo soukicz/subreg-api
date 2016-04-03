@@ -32,7 +32,7 @@ class Client {
             if($res['status'] != 'ok') {
                 throw new IOException('Subreg: ' . $res['error']['errormsg']);
             }
-            $this->key = $res['ssid'];
+            $this->key = $res['data']['ssid'];
         }
 
         return $this->client;
