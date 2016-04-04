@@ -90,4 +90,20 @@ class Client {
 
         return $list;
     }
+
+    /**
+     * @param string $name
+     * @param int $period
+     */
+    public function renewDomain($name, $period = 1) {
+        $this->send('Make_Order', [
+            'order' => [
+                'domain' => $name,
+                'type' => 'Renew_Domain',
+                'params' => [
+                    'period' => $period
+                ]
+            ]
+        ]);
+    }
 }
