@@ -51,7 +51,12 @@ class Client {
         return $res['data'];
     }
 
-    public function createNameServerSet($ownerId, $name, $hosts) {
+    /**
+     * @param string $ownerId
+     * @param string $name
+     * @param string[] $hosts
+     */
+    public function createNameServerSet($ownerId, $name, array $hosts) {
         $nss = [];
         foreach ($hosts as $n) {
             $nss[]['hostname'] = $n;
