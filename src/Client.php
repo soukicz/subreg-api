@@ -67,7 +67,7 @@ class Client {
                 'tech' => [
                     'id' => $ownerId
                 ],
-                'hosts' => $hosts
+                'hosts' => $nss
             ]
         ]);
     }
